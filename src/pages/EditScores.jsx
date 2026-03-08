@@ -4,47 +4,63 @@ import { api } from '../../convex/_generated/api'
 
 export default function EditScores({ hackathonId, onBack }) {
   const [searchTerm, setSearchTerm] = useState('')
-  const [teamScores, setTeamScores] = useState({})
+  const [individualScores, setIndividualScores] = useState({})
 
   const hackathon = useQuery(api.hackathons.get, { id: hackathonId })
   const teams = useQuery(api.teams.listByHackathon, { hackathonId }) || []
   const criteria = useQuery(api.criteria.listByHackathon, { hackathonId }) || []
   const allScores = useQuery(api.scores.getHackathonScores, { hackathonId }) || []
+  const judges = useQuery(api.judges.listByHackathon, { hackathonId }) || []
   const updateScore = useMutation(api.scores.updateScore)
 
-  // Load existing scores into state
+  // Load existing scores into state with unique keys per score
   useEffect(() => {
-    if (allScores.length > 0 && Object.keys(teamScores).length === 0) {
+    if (allScores.length > 0 && Object.keys(individualScores).length === 0) {
       const loadedScores = {}
       for (const score of allScores) {
-        if (!loadedScores[score.teamId]) loadedScores[score.teamId] = {}
-        loadedScores[score.teamId][score.criteriaId] = score.score
+        loadedScores[score._id] = score.score
       }
-      setTeamScores(loadedScores)
+      setIndividualScores(loadedScores)
     }
   }, [allScores])
 
   const filtered = teams.filter((t) => t.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-  const handleScoreChange = (teamId, criteriaId, value) => {
+  const handleScoreChange = (scoreId, value) => {
     const newValue = Math.min(10, Math.max(0, parseInt(value) || 0))
-    setTeamScores(prev => ({ ...prev, [teamId]: { ...prev[teamId], [criteriaId]: newValue } }))
+    setIndividualScores(prev => ({ ...prev, [scoreId]: newValue }))
   }
 
   const getTeamTotal = (teamId) => {
-    const scores = teamScores[teamId] || {}
+    const teamScores = allScores.filter(s => s.teamId === teamId)
     let total = 0
-    for (const c of criteria) {
-      const score = scores[c._id] || 0
-      total += (score / 10) * c.weight
+    const criteriaScoreMap = new Map()
+    
+    for (const score of teamScores) {
+      const currentScore = individualScores[score._id] !== undefined ? individualScores[score._id] : score.score
+      const criterion = criteria.find(c => c._id === score.criteriaId)
+      if (!criterion) continue
+      
+      if (!criteriaScoreMap.has(score.criteriaId)) {
+        criteriaScoreMap.set(score.criteriaId, [])
+      }
+      criteriaScoreMap.get(score.criteriaId).push(currentScore)
     }
+    
+    for (const [criteriaId, scores] of criteriaScoreMap) {
+      const criterion = criteria.find(c => c._id === criteriaId)
+      if (!criterion) continue
+      const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length
+      total += (avgScore / 10) * criterion.weight
+    }
+    
     return Math.round(total * 10) / 10
   }
 
   const handleSave = async () => {
     try {
       for (const score of allScores) {
-        const newValue = teamScores[score.teamId]?.[score.criteriaId]
+        const newValue = individualScores[score._id]
         if (newValue !== undefined && newValue !== score.score) {
           await updateScore({ scoreId: score._id, score: newValue })
         }
@@ -106,22 +122,68 @@ export default function EditScores({ hackathonId, onBack }) {
                   </div>
                 </div>
 
-                {/* Score Inputs */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px', padding: '16px' }}>
-                  {criteria.map((c) => (
-                    <div key={c._id}>
-                      <label style={{ display: 'block', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', color: '#64748b', marginBottom: '6px' }}>{c.name}</label>
-                      <input
-                        type="number"
-                        min="0"
-                        max="10"
-                        value={teamScores[team._id]?.[c._id] || ''}
-                        onChange={(e) => handleScoreChange(team._id, c._id, e.target.value)}
-                        placeholder="0"
-                        style={{ width: '100%', padding: '10px', border: '1px solid #e2e8f0', borderRadius: '8px', fontSize: '16px', fontWeight: '600', textAlign: 'center', backgroundColor: '#f8fafc', outline: 'none', boxSizing: 'border-box' }}
-                      />
-                    </div>
-                  ))}
+                {/* Editable Judge Scores */}
+                <div style={{ padding: '16px', borderTop: '1px solid #f1f5f9' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                    {criteria.map((c) => {
+                      const criteriaScores = allScores.filter(s => s.teamId === team._id && s.criteriaId === c._id)
+                      return (
+                        <div key={c._id}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                            <label style={{ fontSize: '11px', fontWeight: '700', textTransform: 'uppercase', color: '#1e293b' }}>{c.name}</label>
+                            {criteriaScores.length > 0 && (() => {
+                              const scores = criteriaScores.map(s => individualScores[s._id] !== undefined ? individualScores[s._id] : s.score)
+                              const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length
+                              const weightedScore = (avgScore / 10) * c.weight
+                              return (
+                                <span style={{ fontSize: '11px', color: '#0f49bd', fontWeight: '700' }}>
+                                  {avgScore.toFixed(1)}/10 × {c.weight}% = {weightedScore.toFixed(1)}
+                                </span>
+                              )
+                            })()}
+                          </div>
+                          {criteriaScores.length > 0 ? (
+                            criteriaScores.map((score) => {
+                              const judge = judges.find(j => j._id === score.judgeId)
+                              return (
+                                <div key={score._id} style={{ marginBottom: '12px' }}>
+                                  <div style={{ marginBottom: '6px' }}>
+                                    <span style={{ fontSize: '11px', color: '#64748b', fontWeight: '600' }}>👤 {judge?.name || 'Unknown'}</span>
+                                  </div>
+                                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px' }}>
+                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => {
+                                      const currentScore = individualScores[score._id] !== undefined ? individualScores[score._id] : score.score
+                                      const isSelected = currentScore === num
+                                      return (
+                                        <button
+                                          key={num}
+                                          onClick={() => handleScoreChange(score._id, num)}
+                                          style={{
+                                            height: '32px',
+                                            border: isSelected ? 'none' : '1px solid #e2e8f0',
+                                            borderRadius: '6px',
+                                            backgroundColor: isSelected ? '#0f49bd' : 'white',
+                                            color: isSelected ? 'white' : '#475569',
+                                            fontSize: '13px',
+                                            fontWeight: '700',
+                                            cursor: 'pointer'
+                                          }}
+                                        >
+                                          {num}
+                                        </button>
+                                      )
+                                    })}
+                                  </div>
+                                </div>
+                              )
+                            })
+                          ) : (
+                            <p style={{ fontSize: '11px', color: '#94a3b8' }}>No scores</p>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               </div>
             ))}

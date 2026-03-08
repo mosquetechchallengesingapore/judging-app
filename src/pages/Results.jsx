@@ -9,6 +9,7 @@ export default function Results({ hackathonId, onBack }) {
   const teams = useQuery(api.teams.listByHackathon, { hackathonId }) || []
   const criteria = useQuery(api.criteria.listByHackathon, { hackathonId }) || []
   const allScores = useQuery(api.scores.getHackathonScores, { hackathonId }) || []
+  const judges = useQuery(api.judges.listByHackathon, { hackathonId }) || []
 
   // Calculate team scores from actual database scores
   const teamScores = teams.map((team) => {
@@ -26,10 +27,24 @@ export default function Results({ hackathonId, onBack }) {
         const avgScore = criteriaScores.reduce((sum, s) => sum + s.score, 0) / criteriaScores.length
         // Weighted score: (score/10) * weight
         const weightedScore = (avgScore / 10) * c.weight
-        breakdown[c.name] = { score: Math.round(avgScore * 10) / 10, weight: c.weight, weighted: Math.round(weightedScore * 10) / 10 }
+        // Get judge names who scored this
+        const judgeNames = criteriaScores.map(s => {
+          const judge = judges.find(j => j._id === s.judgeId)
+          return judge ? judge.name : 'Unknown'
+        })
+        breakdown[c.name] = { 
+          score: Math.round(avgScore * 10) / 10, 
+          weight: c.weight, 
+          weighted: Math.round(weightedScore * 10) / 10,
+          judges: judgeNames,
+          individualScores: criteriaScores.map(s => ({
+            judgeName: judges.find(j => j._id === s.judgeId)?.name || 'Unknown',
+            score: s.score
+          }))
+        }
         totalScore += weightedScore
       } else {
-        breakdown[c.name] = { score: 0, weight: c.weight, weighted: 0 }
+        breakdown[c.name] = { score: 0, weight: c.weight, weighted: 0, judges: [], individualScores: [] }
       }
     }
     
@@ -128,15 +143,57 @@ export default function Results({ hackathonId, onBack }) {
                 </button>
                 {expandedTeam === team._id && (
                   <div style={{ padding: '0 16px 16px', borderTop: '1px solid #f1f5f9', paddingTop: '12px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
-                      {Object.entries(team.breakdown).map(([name, { score, weight, weighted }]) => (
-                        <div key={name} style={{ backgroundColor: '#e8f0fe', borderRadius: '8px', padding: '8px', textAlign: 'center' }}>
-                          <p style={{ fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', color: '#64748b', marginBottom: '4px' }}>{name}</p>
-                          <p style={{ fontSize: '14px', fontWeight: '700', color: '#0f49bd' }}>{score}/10</p>
-                          <p style={{ fontSize: '11px', color: '#64748b', marginTop: '2px' }}>({weight}%) = {weighted}</p>
+                    {/* Get all unique judges who scored this team */}
+                    {(() => {
+                      const judgeScoreMap = new Map()
+                      Object.entries(team.breakdown).forEach(([criteriaName, { individualScores }]) => {
+                        if (individualScores) {
+                          individualScores.forEach(({ judgeName, score }) => {
+                            if (!judgeScoreMap.has(judgeName)) {
+                              judgeScoreMap.set(judgeName, {})
+                            }
+                            judgeScoreMap.get(judgeName)[criteriaName] = score
+                          })
+                        }
+                      })
+                      
+                      const criteriaNames = Object.keys(team.breakdown)
+                      
+                      return (
+                        <div style={{ overflowX: 'auto' }}>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                            <thead>
+                              <tr style={{ borderBottom: '2px solid #e2e8f0' }}>
+                                <th style={{ textAlign: 'left', padding: '8px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', fontSize: '10px' }}>Judge</th>
+                                {criteriaNames.map(name => (
+                                  <th key={name} style={{ textAlign: 'center', padding: '8px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', fontSize: '10px' }}>{name}</th>
+                                ))}
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {Array.from(judgeScoreMap.entries()).map(([judgeName, scores]) => (
+                                <tr key={judgeName} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                                  <td style={{ padding: '8px', fontWeight: '600', color: '#1e293b' }}>{judgeName}</td>
+                                  {criteriaNames.map(criteriaName => (
+                                    <td key={criteriaName} style={{ textAlign: 'center', padding: '8px', fontWeight: '600', color: '#0f49bd' }}>
+                                      {scores[criteriaName] || '-'}
+                                    </td>
+                                  ))}
+                                </tr>
+                              ))}
+                              <tr style={{ borderTop: '2px solid #e2e8f0', backgroundColor: '#f8fafc' }}>
+                                <td style={{ padding: '8px', fontWeight: '700', color: '#1e293b' }}>Avg</td>
+                                {criteriaNames.map(name => (
+                                  <td key={name} style={{ textAlign: 'center', padding: '8px', fontWeight: '700', color: '#0f49bd' }}>
+                                    {team.breakdown[name].score}
+                                  </td>
+                                ))}
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
-                      ))}
-                    </div>
+                      )
+                    })()}
                   </div>
                 )}
               </div>
