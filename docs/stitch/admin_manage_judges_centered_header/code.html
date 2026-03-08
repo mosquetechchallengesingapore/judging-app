@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - Judges</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#0f49bd",
+                "background-light": "#f6f6f8",
+                "background-dark": "#101622",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center">&lt;Hackathon Name Here&gt;</h2>
+<button class="px-4 py-2 text-sm font-semibold text-slate-400 bg-slate-100 dark:bg-slate-800 rounded-lg cursor-not-allowed opacity-60" disabled="">Save</button></header>
+<!-- Navigation Tabs -->
+<nav class="bg-background-light dark:bg-background-dark sticky top-[73px] z-10">
+<div class="flex border-b border-slate-200 dark:border-slate-800 px-4">
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 flex-1 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-semibold">Criteria</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-primary text-primary pb-3 pt-4 flex-1" href="#">
+<p class="text-sm font-bold">Judges</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-2 border-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 flex-1 hover:text-primary transition-colors" href="#">
+<p class="text-sm font-semibold">Participants</p>
+</a>
+</div>
+</nav>
+<main class="flex-1 p-4 max-w-4xl mx-auto w-full">
+<!-- Add New Judge Section -->
+<section class="mb-8">
+<h2 class="text-xl font-bold mb-4">Add New Judge</h2>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+<input class="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 p-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="e.g. Sarah Johnson" type="text"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Email Address</label>
+<input class="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 p-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="sarah.j@example.com" type="email"/>
+</div>
+<div class="flex flex-col gap-1.5 md:col-span-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Role</label>
+<select class="w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 p-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none">
+<option>Technical Judge</option>
+<option>Creative Judge</option>
+<option>Lead Judge</option>
+<option>Guest Evaluator</option>
+</select>
+</div>
+<div class="md:col-span-1">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md active:scale-95" type="submit">
+                                Add Judge
+                            </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Judges List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-bold">Current Judges</h2>
+<span class="bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">4 Active</span>
+</div>
+<div class="space-y-3">
+<!-- Judge Item 1 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
+                            AM
+                        </div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-slate-900 dark:text-slate-100 truncate">Alexander Murphy</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">alex.murphy@judging.org</p>
+</div>
+<div class="hidden sm:block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                            Lead Judge
+                        </div>
+<button class="size-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Judge Item 2 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
+                            EL
+                        </div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-slate-900 dark:text-slate-100 truncate">Elena Rodriguez</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">e.rodriguez@tech-eval.com</p>
+</div>
+<div class="hidden sm:block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                            Technical Judge
+                        </div>
+<button class="size-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Judge Item 3 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
+                            DB
+                        </div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-slate-900 dark:text-slate-100 truncate">David Brooks</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">dbrooks@design-hub.net</p>
+</div>
+<div class="hidden sm:block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                            Creative Judge
+                        </div>
+<button class="size-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Judge Item 4 -->
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:border-primary/50 transition-colors">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0">
+                            ML
+                        </div>
+<div class="flex-1 min-w-0">
+<h3 class="font-bold text-slate-900 dark:text-slate-100 truncate">Marcus Lee</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 truncate">m.lee@innovation.io</p>
+</div>
+<div class="hidden sm:block px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                            Technical Judge
+                        </div>
+<button class="size-8 flex items-center justify-center rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+</div>
+</body></html>

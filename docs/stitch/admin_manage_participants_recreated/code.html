@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Participant Management - Hackathon App</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f49bd",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-10 bg-background-light dark:bg-background-dark border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-xl mx-auto">
+<button aria-label="Go back" class="flex size-10 items-center justify-start text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Global AI Hack 2024</h1>
+<div class="flex w-10 items-center justify-end">
+<button class="text-primary text-base font-bold leading-normal tracking-wide">Save</button>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="max-w-xl mx-auto">
+<div class="flex border-b border-primary/10 px-4 justify-between">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 flex-1" href="#">
+<p class="text-sm font-bold leading-normal">Criteria</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-500 dark:text-slate-400 pb-3 pt-4 flex-1" href="#">
+<p class="text-sm font-bold leading-normal">Judges</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-primary pb-3 pt-4 flex-1" href="#">
+<p class="text-sm font-bold leading-normal">Participants</p>
+</a>
+</div>
+</div>
+</header>
+<main class="max-w-xl mx-auto pb-10">
+<!-- Add New Team Section -->
+<section class="px-4 py-6">
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight mb-4">Add New Team</h2>
+<div class="space-y-4">
+<label class="flex flex-col w-full">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium pb-2">Team Name</p>
+<input class="form-input flex w-full rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-2 focus:ring-primary border border-primary/20 bg-white dark:bg-slate-800 h-12 placeholder:text-slate-400 p-4 text-base font-normal" placeholder="Enter team name" type="text"/>
+</label>
+<label class="flex flex-col w-full">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium pb-2">Project Description</p>
+<textarea class="form-input flex w-full rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-2 focus:ring-primary border border-primary/20 bg-white dark:bg-slate-800 min-h-[120px] placeholder:text-slate-400 p-4 text-base font-normal resize-none" placeholder="Describe the project goals and tech stack"></textarea>
+</label>
+<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg hover:bg-primary/90 transition-colors">
+                    Add Team to List
+                </button>
+</div>
+</section>
+<!-- Current Teams List -->
+<section class="px-4 py-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight">Current Teams</h2>
+<span class="bg-primary/10 text-primary text-xs font-bold px-2.5 py-1 rounded-full">4 Teams</span>
+</div>
+<div class="space-y-3">
+<!-- Team Card 1 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base">Team Alpha</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm truncate max-w-[200px]">Next-gen AI analytics platform</p>
+</div>
+</div>
+<button aria-label="Delete team" class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Team Card 2 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base">Code Ninjas</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm truncate max-w-[200px]">Decentralized identity solution</p>
+</div>
+</div>
+<button aria-label="Delete team" class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Team Card 3 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base">Binary Builders</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm truncate max-w-[200px]">Sustainability tracking dashboard</p>
+</div>
+</div>
+<button aria-label="Delete team" class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<!-- Team Card 4 -->
+<div class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/10 shadow-sm">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-base">Neural Networkers</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm truncate max-w-[200px]">Healthcare diagnostic assistant</p>
+</div>
+</div>
+<button aria-label="Delete team" class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Footer Spacer -->
+<div class="h-10"></div>
+</main>
+</body></html>

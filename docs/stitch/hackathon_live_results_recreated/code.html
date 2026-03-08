@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#0f49bd",
+                "background-light": "#f6f6f8",
+                "background-dark": "#101622",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<title>Hackathon Leaderboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<button class="text-primary p-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center truncate px-2">BuildTheFuture 2024</h1>
+<div class="w-10"></div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-md mx-auto pb-24">
+<section class="p-4 pt-6">
+<div class="flex items-end justify-center gap-2 h-64 mb-8">
+<div class="flex flex-col items-center flex-1">
+<div class="w-16 h-16 rounded-full border-4 border-slate-300 dark:border-slate-600 overflow-hidden mb-2 shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Avatar for Team Beta" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6GUmCiaosiw2p977jID50LcZ-xkNFwOsCMrGZ1UCkRpWCKsuTERWcl_gMMZH1NG9_zovVH_ydWges-XGoUX696KrEQa0JV-2YywFYzf3iefeJ-jr0x1wVDQu3DnXvQB3MvCtLI0xUQ6LUPHgXW8nt8gZT0Qn7Kycwb14uRA7Nc4x4pRD5EF4SEmdZGPZFdYZHXkO0A1FxKaQcy9nosamFwS1nf8HhxLMzpBAbTOhybryInEeCC5t6Jt885wDT8KrqR836QotDNxE"/>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-lg flex flex-col items-center justify-end pb-4 h-32 relative">
+<span class="absolute -top-4 bg-slate-400 text-white text-xs font-bold px-2 py-0.5 rounded-full">2nd</span>
+<p class="font-bold text-sm truncate w-full text-center px-1">Team Beta</p>
+<p class="text-primary font-bold text-lg">94.5</p>
+</div>
+</div>
+<div class="flex flex-col items-center flex-1 -mt-8">
+<div class="w-20 h-20 rounded-full border-4 border-yellow-400 overflow-hidden mb-2 shadow-xl ring-4 ring-yellow-400/20">
+<img class="w-full h-full object-cover" data-alt="Avatar for Team Alpha" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUA4rLfQ4cxgdZImoh2T5jcdaU1IoG1cGeR6bDpx-P8ZlOFFKoKKSDT_7kZtXSM58TMx8so5jBVOI0DpOzf0V6W2WQpT5VuRXAUU0GSFYRMr6F8aO03DRXEYc-hnkifNR7BctYz8Z4LIJKJaWT-ksxJSRJgJcoerFBP01pVZQZrDh5iCQ9civQ3j54IP6iA0fF_5Lsy1ayKAlRXcNVT6XN5OvJVQEL8UzcfVHpJUx5hwz0mJChW833arYJOe49Jg7JZBfFZ4y_mHo"/>
+</div>
+<div class="w-full bg-primary rounded-t-lg flex flex-col items-center justify-end pb-6 h-48 relative shadow-2xl shadow-primary/20">
+<span class="absolute -top-4 bg-yellow-400 text-slate-900 text-xs font-bold px-3 py-1 rounded-full border-2 border-white">1st</span>
+<p class="font-bold text-white text-base truncate w-full text-center px-1">Team Alpha</p>
+<p class="text-white font-black text-2xl">98.2</p>
+</div>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-16 h-16 rounded-full border-4 border-orange-400 dark:border-orange-800 overflow-hidden mb-2 shadow-lg">
+<img class="w-full h-full object-cover" data-alt="Avatar for Team Gamma" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ2QGd8ggtkCIxjkhlOTUvE66vhnivm4EyCyZZyRh5D_mS5uZfpIBuM0Y_vA1n7UfxtjAeDwF39hSipI7E-OXYMAJEmDB7hmvgDLmNtvMixMRwUu28BCsxmMsCaN93DElFq86NR-_S1fUcjzK4UlEEgP7ksY4pxf8ZIGiJXm4YIaLUNcnHvju1EAgWlG3-8UtHyVtyirvmhhX86W-Q8Ih6T6s0wv7waQA-Y2oGukGVKAYfeenWiNKD6wZLe1gzQmWMQ7iScBf0J4Y"/>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-800 rounded-t-lg flex flex-col items-center justify-end pb-4 h-24 relative">
+<span class="absolute -top-4 bg-orange-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">3rd</span>
+<p class="font-bold text-sm truncate w-full text-center px-1">Team Gamma</p>
+<p class="text-primary font-bold text-lg">91.8</p>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4">
+<h3 class="text-slate-900 dark:text-slate-100 text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                Live Rankings
+            </h3>
+<div class="space-y-3">
+<details class="group bg-white dark:bg-slate-800/50 border border-primary/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between p-4 list-none">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary/40 w-6">4</span>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold">Team Delta</p>
+<p class="text-xs text-slate-500">San Francisco, CA</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-lg font-bold text-primary">88.4</span>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-4 pb-4 border-t border-primary/5 pt-3 space-y-3">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Creativity</p>
+<p class="text-primary font-bold">28/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Technical</p>
+<p class="text-primary font-bold">25/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Pitch</p>
+<p class="text-primary font-bold">35.4/40</p>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-800/50 border border-primary/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between p-4 list-none">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary/40 w-6">5</span>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold">Team Epsilon</p>
+<p class="text-xs text-slate-500">London, UK</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-lg font-bold text-primary">85.1</span>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-4 pb-4 border-t border-primary/5 pt-3 space-y-3">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Creativity</p>
+<p class="text-primary font-bold">24/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Technical</p>
+<p class="text-primary font-bold">29/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Pitch</p>
+<p class="text-primary font-bold">32.1/40</p>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-800/50 border border-primary/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between p-4 list-none">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary/40 w-6">6</span>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold">Team Zeta</p>
+<p class="text-xs text-slate-500">Berlin, DE</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-lg font-bold text-primary">82.9</span>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-4 pb-4 border-t border-primary/5 pt-3 space-y-3">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Creativity</p>
+<p class="text-primary font-bold">26/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Technical</p>
+<p class="text-primary font-bold">26/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Pitch</p>
+<p class="text-primary font-bold">30.9/40</p>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-800/50 border border-primary/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between p-4 list-none">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary/40 w-6">7</span>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold">Team Eta</p>
+<p class="text-xs text-slate-500">Tokyo, JP</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-lg font-bold text-primary">79.5</span>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-4 pb-4 border-t border-primary/5 pt-3 space-y-3">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Creativity</p>
+<p class="text-primary font-bold">22/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Technical</p>
+<p class="text-primary font-bold">27/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Pitch</p>
+<p class="text-primary font-bold">30.5/40</p>
+</div>
+</div>
+</div>
+</details>
+<details class="group bg-white dark:bg-slate-800/50 border border-primary/10 rounded-xl overflow-hidden shadow-sm transition-all duration-300">
+<summary class="flex cursor-pointer items-center justify-between p-4 list-none">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary/40 w-6">8</span>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold">Team Theta</p>
+<p class="text-xs text-slate-500">Austin, TX</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-lg font-bold text-primary">76.2</span>
+<span class="material-symbols-outlined text-slate-400 group-open:rotate-180 transition-transform">expand_more</span>
+</div>
+</summary>
+<div class="px-4 pb-4 border-t border-primary/5 pt-3 space-y-3">
+<div class="grid grid-cols-3 gap-2">
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Creativity</p>
+<p class="text-primary font-bold">25/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Technical</p>
+<p class="text-primary font-bold">21/30</p>
+</div>
+<div class="bg-primary/5 rounded-lg p-2 text-center">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1">Pitch</p>
+<p class="text-primary font-bold">30.2/40</p>
+</div>
+</div>
+</div>
+</details>
+</div>
+</section>
+</main>
+</body></html>

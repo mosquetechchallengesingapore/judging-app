@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f49bd",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Judge Scoring - Team Alpha</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-slate-900 shadow-xl">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-10 flex items-center bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-4 border-b border-slate-200 dark:border-slate-800 justify-between">
+<button class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Score Team: Alpha</h1>
+</header>
+<main class="flex-1 overflow-y-auto">
+<!-- Progress Info -->
+<!-- Scoring Criteria Sections -->
+<div class="p-6 space-y-8"><div class="flex items-center justify-between pb-4">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Currently Scoring</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-slate-400 text-lg">groups</span>
+<select class="text-sm font-bold text-slate-800 dark:text-slate-200 bg-transparent border-none p-0 focus:ring-0 cursor-pointer appearance-none pr-6 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%236b7280%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22m6%208%204%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-right bg-no-repeat">
+<option selected="" value="alpha">Team Alpha</option>
+<option value="beta">Team Beta</option>
+<option value="gamma">Team Gamma</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col items-end"><span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Assigned Judge</span>
+<div class="flex items-center gap-1.5">
+<select class="text-sm font-medium text-slate-600 dark:text-slate-400 bg-transparent border-none p-0 focus:ring-0 cursor-pointer appearance-none pr-6 bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20stroke%3D%22%2394a3b8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%221.5%22%20d%3D%22m6%208%204%204%204-4%22%2F%3E%3C%2Fsvg%3E')] bg-[length:20px_20px] bg-right bg-no-repeat text-right">
+<option selected="" value="sarah">Sarah Jenkins</option>
+<option value="michael">Michael Chen</option>
+<option value="david">David Miller</option>
+</select>
+<span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+</div></div>
+</div>
+<!-- Creativity Slider -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-base font-bold text-slate-900 dark:text-slate-100">Creativity</label>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full font-bold text-sm">8 / 10</span>
+</div>
+<div class="grid grid-cols-5 gap-2 py-2">
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">1</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">2</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">3</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">4</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">5</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">6</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">7</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">8</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">9</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">10</button>
+</div>
+</div>
+<!-- Technical Execution Slider -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<label class="text-base font-bold text-slate-900 dark:text-slate-100">Technical Execution</label>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full font-bold text-sm">6 / 10</span>
+</div>
+<div class="grid grid-cols-5 gap-2 py-2">
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">1</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">2</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">3</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">4</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">5</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">6</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">7</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">8</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">9</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">10</button>
+</div>
+</div>
+<!-- Presentation Rating -->
+<div class="space-y-4">
+<div class="flex items-center justify-between"><label class="text-base font-bold text-slate-900 dark:text-slate-100">Presentation</label>
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full font-bold text-sm">0 / 10</span></div>
+<div class="grid grid-cols-5 gap-2 py-2">
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">1</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">2</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">3</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">4</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">5</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">6</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">7</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">8</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">9</button>
+<button class="h-10 w-full flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 text-sm font-bold text-slate-600 dark:text-slate-400">10</button>
+</div>
+</div>
+<!-- Notes Section -->
+<div class="space-y-3">
+<label class="text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2" for="notes">
+<span class="material-symbols-outlined text-slate-400">notes</span>
+                        Notes
+                    </label>
+<textarea class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-800 dark:text-slate-200" id="notes" placeholder="Share your thoughts on the project's impact and delivery..." rows="4"></textarea>
+</div>
+</div>
+</main>
+<!-- Footer Action -->
+<footer class="p-6 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
+                Submit Scores
+                <span class="material-symbols-outlined">send</span>
+</button>
+<p class="text-center text-[11px] text-slate-400 mt-4 font-medium uppercase tracking-widest">
+                Internal Judging Dashboard v2.4
+            </p>
+</footer>
+</div>
+</body></html>
